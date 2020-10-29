@@ -12,6 +12,8 @@ import Password from "./components/newPassword/Password";
 import InstructionsNewPassword from "./components/newPassword/InstructionsNewPassword";
 import SetNewPassword from "./components/newPassword/SetNewPassword";
 
+
+
 class App extends React.Component {
   render() {
     // const isLogin = this.props.cookies.get("isLogin");
@@ -26,6 +28,8 @@ class App extends React.Component {
           <Route exact path={"/set_new_password/:id"} component={SetNewPassword} />
           <Route exact path={"/signupAll"} component={SignupAll} />
           <Route exact path={"/logout"} component={Logout} />
+    
+
 
         </Switch>
       </Router>

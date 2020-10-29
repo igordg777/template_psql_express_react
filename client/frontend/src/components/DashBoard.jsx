@@ -2,7 +2,10 @@ import React, { Suspense, Component } from 'react';
 import { connect } from 'react-redux';
 import { AddPhotoAC, AddUserAC, AddUsersDashBoard, SetPriority, SetFlightDirection, SetDayTime } from '../redux/action';
 import './styles/DashBoard.css';
-import {Form} from 'antd';
+import Navbar1 from "./Navbar";
+import Navbar2 from "./Navbar2";
+
+import {Form, Button} from 'antd';
 function handleChange(value) {
   console.log(`selected ${value}`);
 }
@@ -11,7 +14,8 @@ class DashBoard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+      showNav1: false,
+      showNav2: false
     };
   }
 
@@ -46,14 +50,46 @@ class DashBoard extends Component {
       console.log('да записалось', this.state.usersLength_psql[0].login);
   }
 
+
+  nav1 = () =>{
+    this.setState({
+      showNav1: !this.state.showNav1,
+    });
+  }
+
+nav2 = () =>{
+  this.setState({
+    showNav2: !this.state.showNav2,
+  });
+}
+
   render() {
     const { getFieldDecorator } = this.props.form;
     
     return (
       <div>
-       Здесь основной код вашего приложения
-<br/>
-       Список всех зарегистрированных пользователей:
+<Button  onClick={this.nav1}>
+Навбар1
+</Button>
+       
+<Button onClick={this.nav2}>
+Навбар2
+</Button>
+     
+  
+{this.state.showNav1 &&
+            <Navbar1/>
+     }
+
+     {this.state.showNav2 &&
+            <Navbar2/>
+     }
+       
+
+        
+      <p>Здесь основной код вашего приложения</p> 
+
+       <p>Список всех зарегистрированных пользователей:</p> 
 
        {this.state.usersLength_psql && this.state.usersLength_psql.map(el => (
                       
@@ -63,8 +99,6 @@ class DashBoard extends Component {
                       
                     ))}
 
-
-       <p><a href="/logout">Выйти</a></p>
         <footer className='footer-users'
           align={'center'}>
           <p>Зарегистрировано пользователей: {this.state.usersLength}</p>
